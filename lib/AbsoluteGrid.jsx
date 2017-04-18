@@ -3,7 +3,7 @@
 import React, { PropTypes, PureComponent, Component } from 'react';
 import { debounce, sortBy } from 'lodash';
 
-import createDisplayObject from './BaseDisplayObject.jsx';
+import createDisplayObject from './BaseDisplayObject';
 import DragManager from './DragManager.js';
 import LayoutManager from './LayoutManager.js';
 
@@ -154,12 +154,20 @@ export default function createAbsoluteGrid(DisplayObject, displayProps = {}, for
     }
 
     getDOMWidth = () => {
-      const width = this.container && this.container.clientWidth;
-
-      if(this.state.layoutWidth !== width){
-        this.setState({layoutWidth: width});
+      let node = this.container;
+      while (node && !node.clientWidth) {
+        node = node.parentNode;
       }
 
+      if (node) {
+        const width = node.clientWidth;
+        if(this.state.layoutWidth !== width){
+          this.setState({layoutWidth: width});
+        }
+      } else {
+        console.warn(`no width`);
+        this.onResize();
+      }
     }
 
 

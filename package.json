@@ -1,10 +1,10 @@
 {
   "name": "react-absolute-grid",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "An absolutely positioned responsive touch-enabled fully configurable React grid with drag/drop, filtering, and sorting",
-  "main": "dist/index.js",
+  "main": "dist/AbsoluteGrid.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack/build.config.js --optimize-minimize",
+    "build": "babel lib --out-dir dist",
     "build-demo": "webpack --config 'webpack/demo.config.js' --optimize-minimize --content-base demo",
     "dev": "webpack-dev-server --config 'webpack/dev.config.js' --devtool eval --progress --colors --hot --content-base demo",
     "lint": "eslint lib",
@@ -21,7 +21,8 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "babel-core": "^6.23.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-lodash": "^3.2.11",
